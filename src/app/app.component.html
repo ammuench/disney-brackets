@@ -1,177 +1,535 @@
 <section id="bracket">
-	<div class="container">
-	<div class="split split-one">
-		<div class="round round-one current">
-			<div class="round-details">Round 1<br/><span class="date">March 16</span></div>
-			<ul class="matchup">
-				<li class="team team-top">Duke<span class="score">76</span></li>
-				<li class="team team-bottom">Virginia<span class="score">82</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Wake Forest<span class="score">64</span></li>
-				<li class="team team-bottom">Clemson<span class="score">56</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">North Carolina<span class="score">68</span></li>
-				<li class="team team-bottom">Florida State<span class="score">54</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">NC State<span class="score">74</span></li>
-				<li class="team team-bottom">Maryland<span class="score">92</span></li>
-			</ul>			
-			<ul class="matchup">
-				<li class="team team-top">Georgia Tech<span class="score">78</span></li>
-				<li class="team team-bottom">Georgia<span class="score">80</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">Auburn<span class="score">64</span></li>
-				<li class="team team-bottom">Florida<span class="score">63</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">Kentucky<span class="score">70</span></li>
-				<li class="team team-bottom">Alabama<span class="score">59</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Vanderbilt<span class="score">64</span></li>
-				<li class="team team-bottom">Gonzaga<span class="score">68</span></li>
-			</ul>										
-		</div>	<!-- END ROUND ONE -->
+  <div class="container">
+    <div class="split split-one">
+      <!-- START ROUND ONE -->
+      <div class="round round-one current">.
+        <div class="round-details">Round 1
+          <br/>
+          <span class="date">64 Films</span>
+        </div>
+        <ng-container *ngFor="let matchA of matchesA; let index = index;">
+          <ul class="matchup" *ngIf="index < 16">
+            <li class="team team-top" [ngClass]="{'winner': matchA.winner && matchA.winner === matchA.team1, 'loser': matchA.winner && matchA.winner === matchA.team2}"
+              (click)="selectWinner(index, matchA.id, matchA.team1, (!matchA.team1 || !matchA.team2))">
+              <strong>{{matchA.team1.name}}</strong> ({{matchA.team1.seed}})
+              <span class="score" *ngIf="!matchA.winner">--</span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchA.winner && matchA.winner === matchA.team2, 'loser': matchA.winner && matchA.winner === matchA.team1}"
+              (click)="selectWinner(index, matchA.id, matchA.team2, (!matchA.team1 || !matchA.team2))">
+              <strong>{{matchA.team2.name}}</strong> ({{matchA.team2.seed}})
+              <span class="score" *ngIf="!matchA.winner">--</span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND ONE -->
+      <!-- START ROUND TWO -->
+      <div class="round round-two">
+        <div class="round-details">Round 2
+          <br/>
+          <span class="date">32 Films</span>
+        </div>
+        <ng-container *ngFor="let matchB of matchesB; let index = index;">
+          <ul class="matchup" *ngIf="index < 8">
+            <li class="team team-top" [ngClass]="{'winner': matchB.winner && matchB.winner === matchB.team1, 'loser': matchB.winner && matchB.winner === matchB.team2}"
+              (click)="selectWinner(index, matchB.id, matchB.team1, (!matchB.team1 || !matchB.team2))">
+              <ng-container *ngIf="matchB.team1">
+                <strong>{{matchB.team1.name}}</strong> ({{matchB.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchB.winner">--</span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchB.winner && matchB.winner === matchB.team2, 'loser': matchB.winner && matchB.winner === matchB.team1}"
+              (click)="selectWinner(index, matchB.id, matchB.team2, (!matchB.team1 || !matchB.team2))">
+              <ng-container *ngIf="matchB.team2">
+                <strong>{{matchB.team2.name}}</strong> ({{matchB.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchB.winner">--</span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND TWO -->
+      <!-- START ROUND THREE -->
+      <div class="round round-three">
+        <div class="round-details">Round 3
+          <br/>
+          <span class="date">16 Films</span>
+        </div>
+        <ng-container *ngFor="let matchC of matchesC; let index = index;">
+          <ul class="matchup" *ngIf="index < 4">
+            <li class="team team-top" [ngClass]="{'winner': matchC.winner && matchC.winner === matchC.team1, 'loser': matchC.winner && matchC.winner === matchC.team2}"
+              (click)="selectWinner(index, matchC.id, matchC.team1, (!matchC.team1 || !matchC.team2))">
+              <ng-container *ngIf="matchC.team1">
+                <strong>{{matchC.team1.name}}</strong> ({{matchC.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchC.winner ">--</span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchC.winner && matchC.winner === matchC.team2, 'loser': matchC.winner && matchC.winner === matchC.team1}"
+              (click)="selectWinner(index, matchC.id, matchC.team2, (!matchC.team1 || !matchC.team2))">
+              <ng-container *ngIf="matchC.team2">
+                <strong>{{matchC.team2.name}}</strong> ({{matchC.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchC.winner">--</span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND THREE -->
+    </div>
 
-		<div class="round round-two">
-			<div class="round-details">Round 2<br/><span class="date">March 18</span></div>			
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>										
-		</div>	<!-- END ROUND TWO -->
-		
-		<div class="round round-three">
-			<div class="round-details">Round 3<br/><span class="date">March 22</span></div>			
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>										
-		</div>	<!-- END ROUND THREE -->		
-	</div> 
+    <!-- PLAYOFF & FINALS ('Big BP') -->
+    <div class="champion expanded">
+      <div class="semis-l quarters-l">
+        <div class="round-details">Quarter Finals
+          <br/>
+          <span class="date">8 Films</span>
+        </div>
+        <ng-container *ngFor="let matchD of matchesD; let index = index;">
+          <ul class="matchup" *ngIf="index < 2">
+            <li class="team team-top" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team1, 'loser': matchD.winner && matchD.winner === matchD.team2}"
+              (click)="selectWinner(index, matchD.id, matchD.team1, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team1">
+                <strong>{{matchD.team1.name}}</strong> ({{matchD.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner ">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team2, 'loser': matchD.winner && matchD.winner === matchD.team1}"
+              (click)="selectWinner(index, matchD.id, matchD.team2, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team2">
+                <strong>{{matchD.team2.name}}</strong> ({{matchD.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="semis-l">
+        <div class="round-details">Semi Finals
+          <br/>
+          <span class="date">4 Films</span>
+        </div>
+        <ng-container *ngFor="let matchE of matchesE; let index = index;">
+          <ul class="matchup" *ngIf="index < 1">
+            <li class="team team-top" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team1, 'loser': matchE.winner && matchE.winner === matchE.team2}"
+              (click)="selectWinner(index, matchE.id, matchE.team1, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team1">
+                <strong>{{matchE.team1.name}}</strong> ({{matchE.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner ">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team2, 'loser': matchE.winner && matchE.winner === matchE.team1}"
+              (click)="selectWinner(index, matchE.id, matchE.team2, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team2">
+                <strong>{{matchE.team2.name}}</strong> ({{matchE.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="final">
+        <i class="fa fa-trophy"></i>
+        <div class="round-details">Final Showdown
+          <br/>
+          <span class="date">2 Films</span>
+        </div>
+        <ul class="matchup championship">
+          <li class="team team-top" [ngClass]="{'winner': matchF.winner && matchF.winner === matchF.team1, 'loser': matchF.winner && matchF.winner === matchF.team2}"
+            (click)="selectWinner(0, matchF.id, matchF.team1, (!matchF.team1 || !matchF.team2))">
+            <ng-container *ngIf="matchF.team1">
+              <strong>{{matchF.team1.name}}</strong> ({{matchF.team1.seed}})
+            </ng-container>
+            <span class="score" *ngIf="!matchF.winner ">--</span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team1">
+              <strong>W</strong>
+            </span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team2">
+              <strong>L</strong>
+            </span>
+          </li>
+          <li class="team team-bottom" [ngClass]="{'winner': matchF.winner && matchF.winner === matchF.team2, 'loser': matchF.winner && matchF.winner === matchF.team1}"
+            (click)="selectWinner(0, matchF.id, matchF.team2, (!matchF.team1 || !matchF.team2))">
+            <ng-container *ngIf="matchF.team2">
+              <strong>{{matchF.team2.name}}</strong> ({{matchF.team2.seed}})
+            </ng-container>
+            <span class="score" *ngIf="!matchF.winner">--</span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team1">
+              <strong>L</strong>
+            </span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team2">
+              <strong>W</strong>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="semis-r">
+        <div class="round-details">Semi Finals
+          <br/>
+          <span class="date">4 Films</span>
+        </div>
+        <ng-container *ngFor="let matchE of matchesE; let index = index;">
+          <ul class="matchup" *ngIf="index > 0">
+            <li class="team team-top" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team1, 'loser': matchE.winner && matchE.winner === matchE.team2}"
+              (click)="selectWinner(index, matchE.id, matchE.team1, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team1">
+                <strong>{{matchE.team1.name}}</strong> ({{matchE.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner ">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team2, 'loser': matchE.winner && matchE.winner === matchE.team1}"
+              (click)="selectWinner(index, matchE.id, matchE.team2, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team2">
+                <strong>{{matchE.team2.name}}</strong> ({{matchE.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="semis-r quarters-r">
+        <div class="round-details">Quarter Finals
+          <br/>
+          <span class="date">8 Films</span>
+        </div>
+        <ng-container *ngFor="let matchD of matchesD; let index = index;">
+          <ul class="matchup" *ngIf="index > 1">
+            <li class="team team-top" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team1, 'loser': matchD.winner && matchD.winner === matchD.team2}"
+              (click)="selectWinner(index, matchD.id, matchD.team1, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team1">
+                <strong>{{matchD.team1.name}}</strong> ({{matchD.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner ">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team2, 'loser': matchD.winner && matchD.winner === matchD.team1}"
+              (click)="selectWinner(index, matchD.id, matchD.team2, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team2">
+                <strong>{{matchD.team2.name}}</strong> ({{matchD.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
 
-<div class="champion">
-		<div class="semis-l">
-			<div class="round-details">west semifinals <br/><span class="date">March 26-28</span></div>		
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
-			</ul>
-		</div>
-		<div class="final">
-			<i class="fa fa-trophy"></i>
-			<div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>		
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
-			</ul>
-		</div>
-		<div class="semis-r">		
-			<div class="round-details">east semifinals <br/><span class="date">March 26-28</span></div>		
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
-			</ul>
-		</div>	
-	</div>
+    <!-- PLAYOFF & FINALS ('Small BP') -->
+    <div class="champion condensed">
+      <div class="semis-l quarters-l">
+        <div class="round-details">Quarter Finals
+          <br/>
+          <span class="date">8 Films</span>
+        </div>
+        <ng-container *ngFor="let matchD of matchesD; let index = index;">
+          <ul class="matchup">
+            <li class="team team-top" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team1, 'loser': matchD.winner && matchD.winner === matchD.team2}"
+              (click)="selectWinner(index, matchD.id, matchD.team1, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team1">
+                <strong>{{matchD.team1.name}}</strong> ({{matchD.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner ">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchD.winner && matchD.winner === matchD.team2, 'loser': matchD.winner && matchD.winner === matchD.team1}"
+              (click)="selectWinner(index, matchD.id, matchD.team2, (!matchD.team1 || !matchD.team2))">
+              <ng-container *ngIf="matchD.team2">
+                <strong>{{matchD.team2.name}}</strong> ({{matchD.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchD.winner">--</span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchD.winner && matchD.winner === matchD.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="semis-l">
+        <div class="round-details">Semi Finals
+          <br/>
+          <span class="date">4 Films</span>
+        </div>
+        <ng-container *ngFor="let matchE of matchesE; let index = index;">
+          <ul class="matchup">
+            <li class="team team-top" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team1, 'loser': matchE.winner && matchE.winner === matchE.team2}"
+              (click)="selectWinner(index, matchE.id, matchE.team1, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team1">
+                <strong>{{matchE.team1.name}}</strong> ({{matchE.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner ">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchE.winner && matchE.winner === matchE.team2, 'loser': matchE.winner && matchE.winner === matchE.team1}"
+              (click)="selectWinner(index, matchE.id, matchE.team2, (!matchE.team1 || !matchE.team2))">
+              <ng-container *ngIf="matchE.team2">
+                <strong>{{matchE.team2.name}}</strong> ({{matchE.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchE.winner">--</span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchE.winner && matchE.winner === matchE.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="final">
+        <i class="fa fa-trophy"></i>
+        <div class="round-details">Final Showdown
+          <br/>
+          <span class="date">2 Films</span>
+        </div>
+        <ul class="matchup championship">
+          <li class="team team-top" [ngClass]="{'winner': matchF.winner && matchF.winner === matchF.team1, 'loser': matchF.winner && matchF.winner === matchF.team2}"
+            (click)="selectWinner(0, matchF.id, matchF.team1, (!matchF.team1 || !matchF.team2))">
+            <ng-container *ngIf="matchF.team1">
+              <strong>{{matchF.team1.name}}</strong> ({{matchF.team1.seed}})
+            </ng-container>
+            <span class="score" *ngIf="!matchF.winner ">--</span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team1">
+              <strong>W</strong>
+            </span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team2">
+              <strong>L</strong>
+            </span>
+          </li>
+          <li class="team team-bottom" [ngClass]="{'winner': matchF.winner && matchF.winner === matchF.team2, 'loser': matchF.winner && matchF.winner === matchF.team1}"
+            (click)="selectWinner(0, matchF.id, matchF.team2, (!matchF.team1 || !matchF.team2))">
+            <ng-container *ngIf="matchF.team2">
+              <strong>{{matchF.team2.name}}</strong> ({{matchF.team2.seed}})
+            </ng-container>
+            <span class="score" *ngIf="!matchF.winner">--</span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team1">
+              <strong>L</strong>
+            </span>
+            <span class="score" *ngIf="matchF.winner && matchF.winner === matchF.team2">
+              <strong>W</strong>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
 
 
-	<div class="split split-two">
+    <div class="split split-two">
+      <div class="round round-three">
+        <div class="round-details">Round 3
+          <br/>
+          <span class="date">16 Films</span>
+        </div>
+        <ng-container *ngFor="let matchC of matchesC; let index = index;">
+          <ul class="matchup" *ngIf="index > 3">
+            <li class="team team-top" [ngClass]="{'winner': matchC.winner && matchC.winner === matchC.team1, 'loser': matchC.winner && matchC.winner === matchC.team2}"
+              (click)="selectWinner(index, matchC.id, matchC.team1, (!matchC.team1 || !matchC.team2))">
+              <ng-container *ngIf="matchC.team1">
+                <strong>{{matchC.team1.name}}</strong> ({{matchC.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchC.winner ">--</span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchC.winner && matchC.winner === matchC.team2, 'loser': matchC.winner && matchC.winner === matchC.team1}"
+              (click)="selectWinner(index, matchC.id, matchC.team2, (!matchC.team1 || !matchC.team2))">
+              <ng-container *ngIf="matchC.team2">
+                <strong>{{matchC.team2.name}}</strong> ({{matchC.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchC.winner">--</span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchC.winner && matchC.winner === matchC.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND THREE -->
 
-
-		<div class="round round-three">
-			<div class="round-details">Round 3<br/><span class="date">March 22</span></div>						
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>										
-		</div>	<!-- END ROUND THREE -->	
-
-		<div class="round round-two">
-			<div class="round-details">Round 2<br/><span class="date">March 18</span></div>						
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>										
-		</div>	<!-- END ROUND TWO -->
- 		<div class="round round-one current">
-			<div class="round-details">Round 1<br/><span class="date">March 16</span></div>
-			<ul class="matchup">
-				<li class="team team-top">Minnesota<span class="score">62</span></li>
-				<li class="team team-bottom">Northwestern<span class="score">54</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Michigan<span class="score">68</span></li>
-				<li class="team team-bottom">Iowa<span class="score">66</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Illinois<span class="score">64</span></li>
-				<li class="team team-bottom">Wisconsin<span class="score">56</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Purdue<span class="score">36</span></li>
-				<li class="team team-bottom">Boise State<span class="score">40</span></li>
-			</ul>			
-			<ul class="matchup">
-				<li class="team team-top">Penn State<span class="score">38</span></li>
-				<li class="team team-bottom">Indiana<span class="score">44</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">Ohio State<span class="score">52</span></li>
-				<li class="team team-bottom">VCU<span class="score">80</span></li>
-			</ul>	
-			<ul class="matchup">
-				<li class="team team-top">USC<span class="score">58</span></li>
-				<li class="team team-bottom">Cal<span class="score">59</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">Virginia Tech<span class="score">74</span></li>
-				<li class="team team-bottom">Dartmouth<span class="score">111</span></li>
-			</ul>										
-		</div>	<!-- END ROUND ONE -->          				
-	</div>
-	</div>
-	</section>
-	<section class="share">
-			<div class="share-wrap">
-				<a class="share-icon" href="https://twitter.com/basement47"><i class="fa fa-twitter"></i></a>
-				<a class="share-icon" href="#"><i class="fa fa-facebook"></i></a>
-				<a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
-			</div>
-	</section>
+      <div class="round round-two">
+        <div class="round-details">Round 2
+          <br/>
+          <span class="date">32 Films</span>
+        </div>
+        <ng-container *ngFor="let matchB of matchesB; let index = index;">
+          <ul class="matchup" *ngIf="index > 7">
+            <li class="team team-top" [ngClass]="{'winner': matchB.winner && matchB.winner === matchB.team1, 'loser': matchB.winner && matchB.winner === matchB.team2}"
+              (click)="selectWinner(index, matchB.id, matchB.team1, (!matchB.team1 || !matchB.team2))">
+              <ng-container *ngIf="matchB.team1">
+                <strong>{{matchB.team1.name}}</strong> ({{matchB.team1.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchB.winner">--</span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchB.winner && matchB.winner === matchB.team2, 'loser': matchB.winner && matchB.winner === matchB.team1}"
+              (click)="selectWinner(index, matchB.id, matchB.team2, (!matchB.team1 || !matchB.team2))">
+              <ng-container *ngIf="matchB.team2">
+                <strong>{{matchB.team2.name}}</strong> ({{matchB.team2.seed}})
+              </ng-container>
+              <span class="score" *ngIf="!matchB.winner">--</span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchB.winner && matchB.winner === matchB.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND TWO -->
+      <div class="round round-one current">
+        <div class="round-details">Round 1
+          <br/>
+          <span class="date">64 Films</span>
+        </div>
+        <ng-container *ngFor="let matchA of matchesA; let index = index;">
+          <ul class="matchup" *ngIf="index > 15">
+            <li class="team team-top" [ngClass]="{'winner': matchA.winner && matchA.winner === matchA.team1, 'loser': matchA.winner && matchA.winner === matchA.team2}"
+              (click)="selectWinner(index, matchA.id, matchA.team1, (!matchA.team1 || !matchA.team2))">
+              <strong>{{matchA.team1.name}}</strong> ({{matchA.team1.seed}})
+              <span class="score" *ngIf="!matchA.winner">--</span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team1">
+                <strong>L</strong>
+              </span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team2">
+                <strong>W</strong>
+              </span>
+            </li>
+            <li class="team team-bottom" [ngClass]="{'winner': matchA.winner && matchA.winner === matchA.team2, 'loser': matchA.winner && matchA.winner === matchA.team1}"
+              (click)="selectWinner(index, matchA.id, matchA.team2, (!matchA.team1 || !matchA.team2))">
+              <strong>{{matchA.team2.name}}</strong> ({{matchA.team2.seed}})
+              <span class="score" *ngIf="!matchA.winner">--</span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team1">
+                <strong>W</strong>
+              </span>
+              <span class="score" *ngIf="matchA.winner && matchA.winner === matchA.team2">
+                <strong>L</strong>
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+      <!-- END ROUND ONE -->
+    </div>
+  </div>
+</section>
+<section class="share">
+  <div class="share-wrap">
+    <a class="share-icon" href="https://twitter.com/basement47">
+      <i class="fa fa-twitter"></i>
+    </a>
+    <a class="share-icon" href="#">
+      <i class="fa fa-facebook"></i>
+    </a>
+    <a class="share-icon" href="#">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </div>
+</section>
